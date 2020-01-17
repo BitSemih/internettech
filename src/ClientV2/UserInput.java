@@ -24,6 +24,8 @@ public class UserInput extends Thread {
 
             String userInput = sc.nextLine();
 
+            System.out.println(userInput);
+
             while (!userInput.matches("[0-9]+")) {
                 System.out.println("* Invalid number. Try again...");
                 System.out.print("> Input: ");
@@ -43,6 +45,30 @@ public class UserInput extends Thread {
                     String bsct1 = promptForAnInput("a Message", 2, 50, true, false);
                     if (!bsct1.isEmpty()) {
                         Main.WriteToServer("BCST " + bsct1);
+                    }
+                    break;
+
+                    //Show list of online users
+                case 2:
+                    Main.WriteToServer("LOU");
+                    break;
+
+                    //Whisper to user
+                case 3:
+                    String username = promptForAnInput("a username", 3, 14, true, false);
+                    if (!username.isEmpty()) {
+                        String message = promptForAnInput("a message to " + username, 2, 50, true, false);
+                        if (!message.isEmpty()) {
+                            Main.WriteToServer("WSPR " + username + " " + message);
+                        }
+                    }
+                    break;
+
+                    //Create group
+                case 4:
+                    String groupname = promptForAnInput("a group name", 5, 15, true, false);
+                    if (!groupname.isEmpty()) {
+                        Main.WriteToServer("GRP_CRT " + groupname);
                     }
                     break;
 
@@ -120,6 +146,9 @@ public class UserInput extends Thread {
     private void printOptionMenu() {
         System.out.println("+-------------------< Available Options >--------------------+");
         System.out.println("| 1 - Send a message to all online users                     |");
+        System.out.println("| 2 - Show list of all online users                          |");
+        System.out.println("| 3 - Whisper to a online user                               |");
+        System.out.println("| 4 - Create a group                                         |");
         System.out.println("| 0 - Logout                                                 |");
         System.out.println("+------------------------------------------------------------+");
         System.out.println("> Enter a corresponding number");

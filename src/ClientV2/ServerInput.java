@@ -43,13 +43,33 @@ public class ServerInput extends Thread{
                     if (choppdUpRsp[1].equals("BCST")){
                         System.out.println("Confirmation: Message Sent! [" + choppdUpRsp[2] + "]");
                     }
+
+                    if (choppdUpRsp[1].equals("LOU")){
+                        System.out.println("+-----------------< List of online users >-------------------+");
+                        for (String username : choppdUpRsp[2].split(" ")){
+                            StringBuilder bufferspace = new StringBuilder();
+                            for (int i = 0; i < (59 - username.length()); i++){
+                                bufferspace.append(" ");
+                            }
+                            System.out.println("| " + username + bufferspace + "|");
+                        }
+                        System.out.println("+------------------------------------------------------------+");
+                    }
                 }
 
+                //Show whisper to client
+                if (rsp.startsWith("WSPR")){
+                    String[] choppdUpRsp = rsp.split(" ", 3);
+                    System.out.println("\n[Server]: Message from " + choppdUpRsp[1] + ": " + choppdUpRsp[2]);
+                }
+
+                //Global message to all clients
                 if (rsp.startsWith("BCST")){
                     String[] choppdUpRsp = rsp.split(" ", 3);
                     System.out.println("\n[Server]: Message from " + choppdUpRsp[1] + ": " + choppdUpRsp[2]);
                 }
 
+                //Automated pong response
                 if (rsp.startsWith("PING")){
                     Main.WriteToServer("PONG");
                 }

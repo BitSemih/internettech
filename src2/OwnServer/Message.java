@@ -44,6 +44,7 @@ public class Message {
      * the message model class. this class is the standard message class
      * @param content the string contained by the message object.
      */
+
     public Message(String content) {
         this.content = content;
     }
