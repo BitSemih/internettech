@@ -40,17 +40,41 @@ public class ServerInput extends Thread{
                         break;
                     }
 
+                    // Global message confirmation
                     if (choppdUpRsp[1].equals("BCST")){
                         System.out.println("Confirmation: Message Sent! [" + choppdUpRsp[2] + "]");
                     }
 
+                    //Create group response to client
+                    if (choppdUpRsp[1].equals("GRP_CRT")){
+                        System.out.println("Confirmation: Group created! [" + choppdUpRsp[2] + "]");
+                    }
+
+                    //Send group list to client
+                    if (choppdUpRsp[1].equals("GRP_LS")){
+                        System.out.println("+-------------------< List of all groups >-------------------+");
+                        System.out.println("| GROUPNAME        Member?[YES/NO]     Owner?[YES/NO]        |");
+                        for (String group : choppdUpRsp[2].split("/")){
+                            System.out.print("| ");
+                            for (String groupProperty : group.split(" ")){
+                                System.out.print(groupProperty + " ");
+                            }
+                            StringBuilder bufferspace = calcBufferSpace(group);
+                            System.out.print(bufferspace + "|");
+                        }
+                        System.out.println("Confirmation: Group created! [" + choppdUpRsp[2] + "]");
+                    }
+
+                    //Whisper confirmation to client
+                    if (choppdUpRsp[1].equals("WSPR")){
+                        System.out.println("Confirmation: Whisper send! [" + choppdUpRsp[2] + "]");
+                    }
+
+                    //Send online user list to client
                     if (choppdUpRsp[1].equals("LOU")){
                         System.out.println("+-----------------< List of online users >-------------------+");
                         for (String username : choppdUpRsp[2].split(" ")){
-                            StringBuilder bufferspace = new StringBuilder();
-                            for (int i = 0; i < (59 - username.length()); i++){
-                                bufferspace.append(" ");
-                            }
+                            StringBuilder bufferspace = calcBufferSpace(username);
                             System.out.println("| " + username + bufferspace + "|");
                         }
                         System.out.println("+------------------------------------------------------------+");
@@ -79,5 +103,13 @@ public class ServerInput extends Thread{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public StringBuilder calcBufferSpace(String string){
+        StringBuilder bufferspace = new StringBuilder();
+        for (int i = 0; i < (59 - string.length()); i++){
+            bufferspace.append(" ");
+        }
+        return bufferspace;
     }
 }

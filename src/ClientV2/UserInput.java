@@ -72,6 +72,10 @@ public class UserInput extends Thread {
                     }
                     break;
 
+                case 5:
+                    Main.WriteToServer("GRP_LS");
+                    break;
+
                 default:
                     System.out.println("Number not valid ...");
                     nrvalid = false;
@@ -149,6 +153,7 @@ public class UserInput extends Thread {
         System.out.println("| 2 - Show list of all online users                          |");
         System.out.println("| 3 - Whisper to a online user                               |");
         System.out.println("| 4 - Create a group                                         |");
+        System.out.println("| 5 - Show groups                                            |");
         System.out.println("| 0 - Logout                                                 |");
         System.out.println("+------------------------------------------------------------+");
         System.out.println("> Enter a corresponding number");

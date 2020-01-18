@@ -273,7 +273,7 @@ public class ActualServer {
                                         } else {
                                             returnStringGRP_LS += "NO";
                                         }
-
+                                        returnStringGRP_LS += "/";
                                     }
                                 } else {
                                     returnStringGRP_LS = "-ERR no groups exist yet";
