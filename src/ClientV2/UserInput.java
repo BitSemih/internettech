@@ -66,21 +66,51 @@ public class UserInput extends Thread {
 
                     //Create group
                 case 4:
-                    String groupname = promptForAnInput("a group name", 5, 15, true, false);
-                    if (!groupname.isEmpty()) {
-                        Main.WriteToServer("GRP_CRT " + groupname);
+                    String groupName = promptForAnInput("a group name", 5, 15, true, false);
+                    if (!groupName.isEmpty()) {
+                        Main.WriteToServer("GRP_CRT " + groupName);
                     }
                     break;
 
+                    //Group list
                 case 5:
                     Main.WriteToServer("GRP_LS");
+                    break;
+
+                    //Join group
+                case 6:
+                    String joinGroupName = promptForAnInput("a group name", 5, 15, true, false);
+                    if (!joinGroupName.isEmpty()) {
+                        Main.WriteToServer("GRP_JOIN " + joinGroupName);
+                    }
+                    break;
+
+                    //Message all members from group
+                case 7:
+                    String messageGroupName = promptForAnInput("a group name to send a message to", 5, 15, true, false);
+                    if (!messageGroupName.isEmpty()) {
+                        String message = promptForAnInput("a message for group: " + messageGroupName, 3, 50, true, false);
+                        if (!message.isEmpty()){
+                            Main.WriteToServer("GRP_MSG " + messageGroupName + " " + message);
+                        }
+                    }
+                    break;
+
+                    //Leave group
+                case 8:
+                    String leaveGroupName = promptForAnInput("a group name to leave it", 5, 15, true, false);
+                    if (!leaveGroupName.isEmpty()){
+                        Main.WriteToServer("GRP_LEAV " + leaveGroupName);
+                    }
+                    break;
+
+                case 9:
                     break;
 
                 default:
                     System.out.println("Number not valid ...");
                     nrvalid = false;
-
-                    //TODO add level two protocol to this.
+                    break;
             }
 
             if (nrvalid) {
@@ -154,6 +184,10 @@ public class UserInput extends Thread {
         System.out.println("| 3 - Whisper to a online user                               |");
         System.out.println("| 4 - Create a group                                         |");
         System.out.println("| 5 - Show groups                                            |");
+        System.out.println("| 6 - Join group                                             |");
+        System.out.println("| 7 - Send message to group                                  |");
+        System.out.println("| 8 - Leave group                                            |");
+        System.out.println("| 9 - Kick user from group                                   |");
         System.out.println("| 0 - Logout                                                 |");
         System.out.println("+------------------------------------------------------------+");
         System.out.println("> Enter a corresponding number");

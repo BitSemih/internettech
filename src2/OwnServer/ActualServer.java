@@ -65,20 +65,28 @@ public class ActualServer {
 
         public void run() {
             while (this.shouldPing) {
+                //Check if username is set otherwise skip thread
+                if (this.clientThread.getUsername() != null){
+                    try {
+                        sleep(10 + new Random().nextInt(10) * 1000);
+                        this.clientThread.heartBeatRecieved = false;
+                        this.clientThread.writeToClient("PING");
 
-                try {
-                    sleep(10 + new Random().nextInt(10) * 1000);
-                    this.clientThread.heartBeatRecieved = false;
-                    this.clientThread.writeToClient("PING");
-
-                    sleep(3000);
-                    if (!this.clientThread.heartBeatRecieved) {
-                        this.shouldPing = false;
-                        this.clientThread.writeToClient("DSCN Pong timeout");
-                        this.clientThread.kill();
+                        sleep(3000);
+                        if (!this.clientThread.heartBeatRecieved) {
+                            this.shouldPing = false;
+                            this.clientThread.writeToClient("DSCN Pong timeout");
+                            this.clientThread.kill();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } else {
+                    try {
+                        sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -109,7 +117,6 @@ public class ActualServer {
         public String getUsername() {
             return this.username;
         }
-
 
         public void run() {
             try {
@@ -331,6 +338,7 @@ public class ActualServer {
                                             returnStringGRP_MSG = "-ERR user is not a member of this group.";
                                         } else {
                                             String[] members = groupManager.getGroupByName(strippedGRP_MSG[0]).getMembers().toArray(new String[0]);
+                                            System.out.println(members);
                                             for (String s : members) {
                                                 for (ClientThread ct : ActualServer.this.clientThreads) {
                                                     if (s.equals(ct.getUsername())) {
