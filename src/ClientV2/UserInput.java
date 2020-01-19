@@ -105,6 +105,16 @@ public class UserInput extends Thread {
                     break;
 
                 case 9:
+                    String kickGroupName = promptForAnInput("a group name to kick a user from", 5, 15, true, false);
+                    if (!kickGroupName.isEmpty()) {
+                        String kickUsername = promptForAnInput("a username to kick from group: " + kickGroupName, 3, 14, true, false);
+                        if (!kickUsername.isEmpty()){
+                            String kickMessage = promptForAnInput("a reason for being kicked from group: " + kickGroupName, 2, 50, true, false);
+                            if (!kickMessage.isEmpty()){
+                                Main.WriteToServer("GRP_KICK " + kickGroupName + " " + kickUsername + " " + kickMessage);
+                            }
+                        }
+                    }
                     break;
 
                 default:

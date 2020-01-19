@@ -405,11 +405,13 @@ public class ActualServer {
                                                 returnStringGRP_KICK = "-ERR you are not the owner of this group, only an owner can kick some one.";
                                             } else {
                                                 //message to initial client
-                                                groupManager.getGroupByName(message.getPayload()).removeClient(this.username);
+                                                System.out.println(strippedGRP_KICK[1]);
+                                                System.out.println(strippedGRP_KICK[0]);
+                                                groupManager.getGroupByName(strippedGRP_KICK[0]).removeClient(strippedGRP_KICK[1]);
                                                 returnStringGRP_KICK = "+OK GRP_KICK " + strippedGRP_KICK[0] + " " + strippedGRP_KICK[1] + " " + this.username + " " + strippedGRP_KICK[2];
 
                                                 //message to all members ALREADY part of the group
-                                                String[] members = groupManager.getGroupByName(message.getPayload()).getMembers().toArray(new String[0]);
+                                                String[] members = groupManager.getGroupByName(strippedGRP_KICK[0]).getMembers().toArray(new String[0]);
                                                 for (String s : members) {
                                                     for (ClientThread ct : ActualServer.this.clientThreads) {
                                                         if (s.equals(ct.getUsername())) {

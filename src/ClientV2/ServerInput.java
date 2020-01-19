@@ -140,7 +140,10 @@ public class ServerInput extends Thread {
                 //Send group kick confirmation to client
                 if (rsp.startsWith("GRP_KICK")){
                     String[] choppdUpRsp = rsp.split(" ", 3);
-                    System.out.println("[" + choppdUpRsp[1] + "]: " + choppdUpRsp[2] + " has been kicked from the group" );
+                    String kickedUsername = choppdUpRsp[2].split(" ")[0];
+                    String ownerUsername = choppdUpRsp[2].split(" ")[1];
+                    String reason = choppdUpRsp[2].split(" ", 3)[2];
+                    System.out.println("[" + choppdUpRsp[1] + "]: " + kickedUsername + " has been kicked from the group by: " + ownerUsername +  " for reason: " + reason);
                 }
 
                 //Show whisper to client
