@@ -427,6 +427,19 @@ public class ActualServer {
                                 writeToClient(returnStringGRP_KICK);
                                 break;
 
+                            case FILE_SEND:
+                                System.out.println(message.getPayload());
+                                File file = new File(message.getPayload());
+                                byte[] bytesArray = new byte[(int) file.length()];
+                                FileInputStream fis = new FileInputStream(file);
+                                fis.read(bytesArray);
+                                fis.close();
+                                FileOutputStream fos = new FileOutputStream("C:\\Users\\semih\\OneDrive\\Documenten\\receivedZIP.rar");
+                                fos.write(bytesArray);
+                                fos.close();
+
+                                break;
+
                             case PONG:
                                 this.heartBeatRecieved = true;
                                 break;
