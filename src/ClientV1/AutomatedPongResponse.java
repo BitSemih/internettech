@@ -2,10 +2,21 @@ package ClientV1;
 
 import java.io.*;
 
+/**
+ * The type Automated pong response.
+ */
 public class AutomatedPongResponse extends Thread {
 
+    /**
+     * The Reader.
+     */
     BufferedReader reader;
 
+    /**
+     * Instantiates a new Automated pong response.
+     *
+     * @param reader the reader
+     */
     public AutomatedPongResponse(BufferedReader reader) {
         this.reader = reader;
     }

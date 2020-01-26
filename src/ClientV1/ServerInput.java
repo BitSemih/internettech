@@ -3,10 +3,21 @@ package ClientV1;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * The type Server input.
+ */
 public class ServerInput extends Thread{
 
+    /**
+     * The Reader.
+     */
     BufferedReader reader;
 
+    /**
+     * Instantiates a new Server input.
+     *
+     * @param reader the reader
+     */
     public ServerInput(BufferedReader reader) {
         this.reader = reader;
     }

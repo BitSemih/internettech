@@ -1,7 +1,10 @@
 package ClientV3;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+
 
 /**
  * The type Server input.
@@ -160,7 +163,9 @@ public class ServerInput extends Thread {
                 //Show whisper to client
                 if (rsp.startsWith("WSPR")) {
                     String[] choppdUpRsp = rsp.split(" ", 3);
-                    System.out.println("\n[Server]: Message from " + choppdUpRsp[1] + ": " + choppdUpRsp[2]);
+                    EncryptData encryption = new EncryptData();
+                    String decrypted = encryption.DecryptString(choppdUpRsp[2]);
+                    System.out.println("\n[Server]: Message from " + choppdUpRsp[1] + ": " + decrypted);
                 }
 
                 //Global message to all clients

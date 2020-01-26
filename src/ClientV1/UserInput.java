@@ -2,8 +2,14 @@ package ClientV1;
 
 import java.util.Scanner;
 
+/**
+ * The type User input.
+ */
 public class UserInput extends Thread {
 
+    /**
+     * Instantiates a new User input.
+     */
     public UserInput() {
     }
 
@@ -55,10 +61,11 @@ public class UserInput extends Thread {
 
     /**
      * this is a method to easily prompt the user for an input.
-     * @param what a string with what this method needs to ask for.
-     * @param minLength the minimal length of the input.
-     * @param maxLength the maximum length of the input.
-     * @param showMinMax if the method should show the boundaries for the length
+     *
+     * @param what              a string with what this method needs to ask for.
+     * @param minLength         the minimal length of the input.
+     * @param maxLength         the maximum length of the input.
+     * @param showMinMax        if the method should show the boundaries for the length
      * @param specialCharsCheck if the method should check the input given by the user on only containing letter, numbers, and underscores.
      * @return the input given by the user.
      */

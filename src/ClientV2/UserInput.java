@@ -2,8 +2,14 @@ package ClientV2;
 
 import java.util.Scanner;
 
+/**
+ * The type User input.
+ */
 public class UserInput extends Thread {
 
+    /**
+     * Instantiates a new User input.
+     */
     public UserInput() {
     }
 

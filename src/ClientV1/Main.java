@@ -4,7 +4,15 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Main().run();
     }
@@ -12,9 +20,18 @@ public class Main {
     // Reminder:
     // Initiate ActualServer: java -jar chat_server.jar --no-colors --port 1338
 
+    /**
+     * The constant SERVER_ADDRESS.
+     */
     public static String SERVER_ADDRESS = "127.0.0.1";
+    /**
+     * The constant SERVER_PORT.
+     */
     public static int SERVER_PORT = 1338;
 
+    /**
+     * The constant socket.
+     */
     public static Socket socket;
 
     static {
@@ -28,6 +45,9 @@ public class Main {
         }
     }
 
+    /**
+     * Run.
+     */
     public void run() {
 
         try {
@@ -52,6 +72,11 @@ public class Main {
 
     }
 
+    /**
+     * Write to server.
+     *
+     * @param input the input
+     */
     public static void WriteToServer(String input) {
         OutputStream outputStream = null;
         try {
@@ -64,6 +89,11 @@ public class Main {
         }
     }
 
+    /**
+     * Pause.
+     *
+     * @param millis the millis
+     */
     public static void pause(long millis) {
         try {
             Thread.sleep(millis);
@@ -72,6 +102,12 @@ public class Main {
         }
     }
 
+    /**
+     * Has special chars boolean.
+     *
+     * @param inputString the input string
+     * @return the boolean
+     */
     public static boolean hasSpecialChars(String inputString) {
         if (inputString == null || inputString.trim().isEmpty()) {
             return false;
@@ -81,6 +117,11 @@ public class Main {
         return inputString.contains(specialChars);
     }
 
+    /**
+     * Enter to conineu.
+     *
+     * @param showText the show text
+     */
     public static void EnterToConineu(boolean showText){
         Scanner sc = new Scanner(System.in);
         if (showText) {
@@ -89,6 +130,11 @@ public class Main {
         sc.nextLine();
     }
 
+    /**
+     * Login prompt.
+     *
+     * @param reader the reader
+     */
     public void LoginPrompt(BufferedReader reader){
         Scanner sc = new Scanner(System.in);
 

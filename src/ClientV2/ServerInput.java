@@ -3,10 +3,21 @@ package ClientV2;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * The type Server input.
+ */
 public class ServerInput extends Thread {
 
+    /**
+     * The Reader.
+     */
     BufferedReader reader;
 
+    /**
+     * Instantiates a new Server input.
+     *
+     * @param reader the reader
+     */
     public ServerInput(BufferedReader reader) {
         this.reader = reader;
     }
@@ -168,6 +179,13 @@ public class ServerInput extends Thread {
         }
     }
 
+    /**
+     * Calc buffer space string builder.
+     *
+     * @param string the string
+     * @param length the length
+     * @return the string builder
+     */
     public StringBuilder calcBufferSpace(String string, int length) {
         StringBuilder bufferSpace = new StringBuilder();
         if (string == null){

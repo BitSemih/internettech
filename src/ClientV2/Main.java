@@ -5,7 +5,15 @@ import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Main().run();
     }
@@ -13,11 +21,23 @@ public class Main {
     // Reminder:
     // Initiate ActualServer: java -jar chat_server.jar --no-colors --port 1338
 
+    /**
+     * The constant SERVER_ADDRESS.
+     */
     public static String SERVER_ADDRESS = "127.0.0.1";
+    /**
+     * The constant SERVER_PORT.
+     */
     public static int SERVER_PORT = 1338;
 
+    /**
+     * The constant userName.
+     */
     public static String userName;
 
+    /**
+     * The constant socket.
+     */
     public static Socket socket;
 
     static {
@@ -97,7 +117,7 @@ public class Main {
      * else it returns true
      *
      * @param inputString the text to be tested on special characters.
-     * @return
+     * @return boolean
      */
     public static boolean hasSpecialChars(String inputString) {
         if (inputString == null || inputString.trim().isEmpty()) {

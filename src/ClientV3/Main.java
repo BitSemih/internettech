@@ -117,7 +117,7 @@ public class Main {
      * else it returns true
      *
      * @param inputString the text to be tested on special characters.
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean hasSpecialChars(String inputString) {
         if (inputString == null || inputString.trim().isEmpty()) {
@@ -165,15 +165,14 @@ public class Main {
 
                 String userInput = sc.nextLine();
 
-                if (!Main.hasSpecialChars(userInput)) {
+                if (!Main.hasSpecialChars(userInput) && userInput.length() > 2 && userInput.length() < 15) {
 
                     Main.WriteToServer("HELO " + userInput);
 
                     //Necessary to NOT get ahead of the server's response.
                     Main.pause((100));
 
-                    //if (reader.ready()) {
-
+                    if (reader.ready()) {
                         String rsp = reader.readLine();
                         reader.mark(rsp.length());
                         reader.reset();
@@ -185,13 +184,14 @@ public class Main {
 
                             break;
                         } else if (rsp.startsWith("-ERR")) {
+                            //Check if server response is an error
                             String[] rspSplit = rsp.split(" ", 2);
                             System.out.println("Error: " + rspSplit[1]);
                             System.out.println("Try again...");
                         }
-                    //}
-
+                    }
                 } else {
+                    //Check if the input valid
                     System.out.println("* Input invalid try again '" + userInput +"'");
                 }
 

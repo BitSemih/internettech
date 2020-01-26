@@ -207,6 +207,8 @@ public class ActualServer {
                                 String[] strippedWSPR = message.getPayload().split(" ", 2);
                                 boolean userFound = false;
 
+                                System.out.println(strippedWSPR[1]);
+
                                 for (ClientThread ct : ActualServer.this.clientThreads) {
                                     if (ct.getUsername().equals(strippedWSPR[0])) {
                                         ct.writeToClient("WSPR [" + this.username + "] " + strippedWSPR[1]);
@@ -427,19 +429,6 @@ public class ActualServer {
                                 writeToClient(returnStringGRP_KICK);
                                 break;
 
-                            case FILE_SEND:
-                                System.out.println(message.getPayload());
-                                File file = new File(message.getPayload());
-                                byte[] bytesArray = new byte[(int) file.length()];
-                                FileInputStream fis = new FileInputStream(file);
-                                fis.read(bytesArray);
-                                fis.close();
-                                FileOutputStream fos = new FileOutputStream("C:\\Users\\semih\\OneDrive\\Documenten\\receivedZIP.rar");
-                                fos.write(bytesArray);
-                                fos.close();
-
-                                break;
-
                             case PONG:
                                 this.heartBeatRecieved = true;
                                 break;
@@ -451,7 +440,6 @@ public class ActualServer {
 
                     }
                 }
-
 
                 ActualServer.this.clientThreads.remove(this);
                 this.socket.close();

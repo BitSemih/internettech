@@ -1,5 +1,10 @@
 package ClientV3;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -54,23 +59,25 @@ public class UserInput extends Thread {
                     }
                     break;
 
-                    //Show list of online users
+                //Show list of online users
                 case 2:
                     Main.WriteToServer("LOU");
                     break;
 
-                    //Whisper to user
+                //Whisper to user
                 case 3:
                     String username = promptForAnInput("a username", 3, 14, true, false);
                     if (!username.isEmpty()) {
                         String message = promptForAnInput("a message to " + username, 2, 50, true, false);
+                        EncryptData encryption = new EncryptData();
+                        String encrypted = encryption.EncryptString(message);
                         if (!message.isEmpty()) {
-                            Main.WriteToServer("WSPR " + username + " " + message);
+                            Main.WriteToServer("WSPR " + username + " " + encrypted);
                         }
                     }
                     break;
 
-                    //Create group
+                //Create group
                 case 4:
                     String groupName = promptForAnInput("a group name", 5, 15, true, false);
                     if (!groupName.isEmpty()) {
@@ -78,12 +85,12 @@ public class UserInput extends Thread {
                     }
                     break;
 
-                    //Group list
+                //Group list
                 case 5:
                     Main.WriteToServer("GRP_LS");
                     break;
 
-                    //Join group
+                //Join group
                 case 6:
                     String joinGroupName = promptForAnInput("a group name", 5, 15, true, false);
                     if (!joinGroupName.isEmpty()) {
@@ -91,21 +98,21 @@ public class UserInput extends Thread {
                     }
                     break;
 
-                    //Message all members from group
+                //Message all members from group
                 case 7:
                     String messageGroupName = promptForAnInput("a group name to send a message to", 5, 15, true, false);
                     if (!messageGroupName.isEmpty()) {
                         String message = promptForAnInput("a message for group: " + messageGroupName, 3, 50, true, false);
-                        if (!message.isEmpty()){
+                        if (!message.isEmpty()) {
                             Main.WriteToServer("GRP_MSG " + messageGroupName + " " + message);
                         }
                     }
                     break;
 
-                    //Leave group
+                //Leave group
                 case 8:
                     String leaveGroupName = promptForAnInput("a group name to leave it", 5, 15, true, false);
-                    if (!leaveGroupName.isEmpty()){
+                    if (!leaveGroupName.isEmpty()) {
                         Main.WriteToServer("GRP_LEAV " + leaveGroupName);
                     }
                     break;
@@ -114,19 +121,12 @@ public class UserInput extends Thread {
                     String kickGroupName = promptForAnInput("a group name to kick a user from", 5, 15, true, false);
                     if (!kickGroupName.isEmpty()) {
                         String kickUsername = promptForAnInput("a username to kick from group: " + kickGroupName, 3, 14, true, false);
-                        if (!kickUsername.isEmpty()){
+                        if (!kickUsername.isEmpty()) {
                             String kickMessage = promptForAnInput("a reason for being kicked from group: " + kickGroupName, 2, 50, true, false);
-                            if (!kickMessage.isEmpty()){
+                            if (!kickMessage.isEmpty()) {
                                 Main.WriteToServer("GRP_KICK " + kickGroupName + " " + kickUsername + " " + kickMessage);
                             }
                         }
-                    }
-                    break;
-
-                case 10:
-                    String message = promptForAnInput("a file location", 3, 100, false, false);
-                    if (!message.isEmpty()) {
-                        Main.WriteToServer("FILE_SEND " + message);
                     }
                     break;
 
@@ -170,7 +170,7 @@ public class UserInput extends Thread {
             System.out.print("> Input: ");
             String input = sc.nextLine();
 
-            if (input.equals("q")){
+            if (input.equals("q")) {
                 return returnvalue;
             }
 

@@ -37,9 +37,7 @@ public class Message {
         GRP_JOIN,
         GRP_MSG,
         GRP_LEAV,
-        GRP_KICK,
-
-        FILE_SEND
+        GRP_KICK
     }
 
     /**
